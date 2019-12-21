@@ -1,65 +1,76 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        frontend
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div v-if="$auth.loggedIn && $auth.user.role == 'client'">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Client information</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Name: {{ $auth.user.client_profile.name }}</li>
+                  <li class="list-group-item">Surname: {{ $auth.user.client_profile.surname }}</li>
+                  <li class="list-group-item">Date of birth: {{ $auth.user.client_profile.birthday }}</li>
+                  <li class="list-group-item">Email: {{ $auth.user.email }}</li>
+                  <li class="list-group-item">Phone number: {{ $auth.user.client_profile.phone }}</li>
+                  <li class="list-group-item">Address: {{ $auth.user.client_profile.address }}</li>
+                  <li class="list-group-item">Country: {{ $auth.user.client_profile.country }}</li>
+                </ul>
+              </div>
+            </div>
+            <div v-else-if="$auth.loggedIn && $auth.user.role == 'user'">
+              <h5>Clients list</h5>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>#</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="client in clients" :key="client.id">
+                            <td>{{ client.id }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.client_profile.name }}</td>
+                            <td>
+                                <nuxt-link :to="`/user/${client.id}`">View detail</nuxt-link>
+                            </td>
+                            <td>
+                                <nuxt-link :to="`/user/${client.id}/edit`">Edit</nuxt-link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div v-else>
+              <h5>Welcome</h5>
+              {{ clients }}
+            </div>
+        </div>
     </div>
-  </section>
+</div>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+
 
 export default {
-  components: {
-    AppLogo
-  }
+    async asyncData({$axios, $auth}) {
+    if($auth.loggedIn && $auth.user.role == 'user') {
+      let response = await $axios.get('user/dashboard');
+          let clients = response.data.clients;
+          return {
+              clients
+          }
+      }
+      else {
+        return {
+          clients: null
+        }
+      }
+    }
 }
 </script>
-
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
-
