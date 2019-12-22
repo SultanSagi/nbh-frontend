@@ -26,7 +26,7 @@ module.exports = {
   ],
 
   axios: {
-    baseURL: 'http://ecoworldkz.myjino.ru/api'
+    baseURL: 'http://localhost:8000/api'
   },
 
   auth: {

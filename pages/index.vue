@@ -46,8 +46,6 @@
                 </table>
             </div>
             <div v-else>
-              <h5>Welcome</h5>
-              {{ clients }}
             </div>
         </div>
     </div>

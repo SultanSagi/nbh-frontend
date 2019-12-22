@@ -6,37 +6,37 @@
             <form @submit.prevent="updateClient">
                 <div class="form-group">
                     <label for="email" class="col-form-label">E-Mail Address</label>
-                    <input type="email" class="form-control" v-model="client.email">
+                    <input type="email" class="form-control" v-model="client.email" required>
                 </div>
 
                 <div class="form-group">
                     <label for="name" class="col-form-label">Name</label>
-                    <input class="form-control" v-model="client.client_profile.name">
+                    <input class="form-control" v-model="client.client_profile.name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="surname" class="col-form-label">Surname</label>
-                    <input class="form-control" v-model="client.client_profile.surname">
+                    <input class="form-control" v-model="client.client_profile.surname" required>
                 </div>
 
                 <div class="form-group">
                     <label for="birthday" class="col-form-label">Date of birth</label>
-                    <input class="form-control" v-model="client.client_profile.birthday">
+                    <input class="form-control"  type="date" v-model="client.client_profile.birthday" pattern="\d{4}-\d{2}-\d{2}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone" class="col-form-label">Phone</label>
-                    <input class="form-control" v-model="client.client_profile.phone">
+                    <input class="form-control" v-model="client.client_profile.phone" required>
                 </div>
 
                 <div class="form-group">
                     <label for="address" class="col-form-label">Address</label>
-                    <input class="form-control" v-model="client.client_profile.address">
+                    <input class="form-control" v-model="client.client_profile.address" required>
                 </div>
 
                 <div class="form-group">
                     <label for="country" class="col-form-label">Country</label>
-                    <input class="form-control" v-model="client.client_profile.country">
+                    <input class="form-control" v-model="client.client_profile.country" required>
                 </div>
 
                 <div class="form-group">
