@@ -14,7 +14,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="client in clients" :key="client.id">
+
+                    <tr v-for="client in $auth.user.clients" :key="client.id">
                         <td>{{ client.id }}</td>
                         <td>{{ client.email }}</td>
                         <td>{{ client.client_profile.name }}</td>
@@ -31,18 +32,3 @@
     </div>
 </div>
 </template>
-
-<script>
-
-
-export default {
-    middleware: 'user-only',
-    async asyncData({$axios}) {
-    let response = await $axios.get('user/dashboard');
-        let clients = response.data.clients;
-        return {
-            clients
-        }
-    }
-}
-</script>

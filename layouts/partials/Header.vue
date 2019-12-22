@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
-            <nuxt-link :to="{ name: 'index' }" class="navbar-brand">{{ $auth.loggedIn ? 'Dashboard' : 'App' }}</nuxt-link>
+            <nuxt-link :to="{ name: 'index' }" class="navbar-brand">{{ $auth.loggedIn ? ($auth.user.role == 'client' ? 'Client Dashboard' : 'CRM Dashboard') : 'App' }}</nuxt-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -11,7 +11,7 @@
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
 
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" v-model="form.email">
+                                    <input type="email" class="form-control" v-model="form.email" required>
                                 </div>
                             </div>
 
@@ -19,7 +19,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" v-model="form.password">
+                                    <input type="password" class="form-control" v-model="form.password" required>
                                 </div>
                             </div>
 
@@ -59,10 +59,10 @@ export default {
                         password: this.form.password
                     }
                 })
+                this.$router.push('/')
             } catch(error) {
                 alert('There was an error. Please try again.')
             }
-            this.$router.push('/')
         }
     }
 }
